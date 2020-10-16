@@ -17,6 +17,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/sidebar-style.css">
+    @yield('link-style')
 
     <style>
         .form-section{
@@ -32,6 +34,7 @@
             width: 50%;
             margin-right: 10px;
         }
+
 
     </style>
 
@@ -102,7 +105,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>
