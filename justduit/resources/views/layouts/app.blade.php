@@ -10,15 +10,30 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <style>
+        .form-section{
+            width: 100%;
+        }
+
+        .search-section{
+            display: flex;
+            justify-content: center;
+        }
+
+        .input-search{
+            width: 50%;
+            margin-right: 10px;
+        }
+
+    </style>
 
 
 </head>
@@ -29,6 +44,18 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+
+                <div class="form-section">
+                    <form action="/search" method="GET">
+                        <div class="search-section">
+                            <input type="search" name="search" class="form-control input-search">
+                            <span class="form-group-btn button-span">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
