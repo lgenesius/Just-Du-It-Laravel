@@ -29,7 +29,7 @@ class ShoesController extends Controller
     public function store(){
         $data = request()->validate([
             'name' => 'required',
-            'price' => ['required', 'min:100'],
+            'price' => ['required', 'numeric', 'min:100'],
             'description' => ['required'],
             'image' => ['required', 'image'],
         ]);
