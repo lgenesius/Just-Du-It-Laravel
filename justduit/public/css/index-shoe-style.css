@@ -1,0 +1,59 @@
+.index-shoe-section {
+    max-width: 90%;
+    margin-left: 5%;
+    padding: 20px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.index-shoe-body{
+    margin-top: 50px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 1rem;
+}
+
+.index-shoe-body a{
+    text-decoration: none;
+}
+
+.index-shoe-detail{
+    text-align: center;
+}
+
+.index-shoe-detail img{
+    width: 100%;
+    height: 250px;
+}
+
+.no-result{
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+}
+
+.no-result h1{
+    font-size: 80px;
+    font-weight: 700;
+}
+
+.no-result h2{
+    margin-top: 10px;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.no-result h3{
+    font-size: 30px;
+    margin-top: 10px;
+}

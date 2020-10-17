@@ -13,7 +13,7 @@ class ShoesController extends Controller
     }
 
     public function index(){
-        $shoes = Shoe::all();
+        $shoes = Shoe::orderBy('id','desc')->paginate(6);
 
         return view('shoes.index', compact('shoes'));
     }

@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/shoes', 'ShoesController@index');
 Route::get('/shoes/create', 'ShoesController@create');
 Route::post('/shoes', 'ShoesController@store');
+Route::get('/search', 'HomeController@search');

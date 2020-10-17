@@ -20,7 +20,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $shoes = Shoe::all();
+        $shoes = Shoe::orderBy('id','desc')->paginate(6);
+
+        return view('shoes.index', compact('shoes'));
+    }
+
+    public function search(Request $request){
+        $search = $request->get('search');
+        $shoes = Shoe::where('name', 'like', '%'.$search.'%')->orderBy('id','desc')->paginate(6);
 
         return view('shoes.index', compact('shoes'));
     }
