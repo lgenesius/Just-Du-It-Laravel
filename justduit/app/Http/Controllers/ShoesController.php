@@ -27,6 +27,10 @@ class ShoesController extends Controller
     }
 
     public function store(){
+        if(auth()->user()->role != 1){
+            abort(401);
+        }
+
         $data = request()->validate([
             'name' => 'required',
             'price' => ['required', 'numeric', 'min:100'],
@@ -41,6 +45,43 @@ class ShoesController extends Controller
             'price' => $data['price'],
             'description' => $data['description'],
             'image' => $imagePath,
+        ]);
+
+        return redirect('/shoes');
+    }
+
+    public function edit(Shoe $shoe){
+        if(auth()->user()->role != 1){
+            abort(401);
+        }
+
+        return view('shoes.edit', compact('shoe'));
+    }
+
+    public function update($shoe){
+        if(auth()->user()->role != 1){
+            abort(401);
+        }
+
+        $data = request()->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'image' => 'image',
+        ]);
+
+        if(request('image')){
+            $imagePath = request('image')->store('images', 'public');
+        }
+        else {
+            $imagePath = request('oldImage');
+        }
+
+        Shoe::find($shoe)->update([
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'description' => $data['description'],
+            'image' => $imagePath
         ]);
 
         return redirect('/shoes');

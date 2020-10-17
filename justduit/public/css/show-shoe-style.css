@@ -1,0 +1,23 @@
+.show-shoe-section{
+    max-width: 90%;
+    margin-left: 5%;
+    margin-top: 30px;
+    padding: 20px;
+    display: flex;
+}
+
+.show-shoe-section img{
+    width: 400px;
+}
+
+.show-shoe-text{
+    margin-left: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.show-shoe-image{
+    display: flex;
+    flex-direction: column;
+}

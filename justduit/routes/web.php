@@ -13,11 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index');
-
 Auth::routes();
 
 Route::get('/shoes', 'ShoesController@index');
 Route::get('/shoes/create', 'ShoesController@create');
 Route::post('/shoes', 'ShoesController@store');
+Route::get('/shoes/{shoe}/edit', 'ShoesController@edit');
+Route::put('/shoes/{shoe}', 'ShoesController@update');
+
+Route::get('/', 'HomeController@index');
 Route::get('/search', 'HomeController@search');
+Route::get('/shoes/{shoe}', 'HomeController@show');
+

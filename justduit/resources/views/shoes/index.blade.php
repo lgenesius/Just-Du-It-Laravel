@@ -15,10 +15,10 @@
                 @if(count($shoes) > 0)
                     <div class="row index-shoe-body">
                         @foreach ($shoes as $shoe)
-                            <a href="/shoes/{{ $shoe->id }}">
+                            <a href="/shoes/{{ $shoe->id }}" class="mt-1">
                                 <div class="index-shoe-detail">
                                     <img src="/storage/{{ $shoe->image }}">
-                                    <h5>{{ $shoe->name }}</h5>
+                                    <h5 class="mt-2">{{ $shoe->name }}</h5>
                                     <h5>Rp {{ $shoe->price }},00</h5>
                                 </div>
                             </a>

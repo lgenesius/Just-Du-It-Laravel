@@ -1,0 +1,15 @@
+.edit-shoe-section{
+    margin: 30px 50px 30px 50px;
+    border: 2px solid black;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.edit-shoe-image{
+    margin: 0 auto 0 auto;
+    width: 300px;
+}
+
+.edit-shoe-image img{
+    width: 100%;
+}

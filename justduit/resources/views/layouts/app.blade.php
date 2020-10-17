@@ -51,7 +51,7 @@
                 <div class="form-section">
                     <form action="/search" method="GET">
                         <div class="search-section">
-                            <input type="search" name="search" class="form-control input-search" placeholder="Search shoe's name...">
+                            <input type="search" name="search" class="form-control input-search" placeholder="Search shoes name...">
                             <span class="form-group-btn button-span">
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </span>

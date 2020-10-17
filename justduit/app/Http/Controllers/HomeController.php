@@ -31,4 +31,9 @@ class HomeController extends Controller
 
         return view('shoes.index', compact('shoes'));
     }
+
+    public function show(Shoe $shoe){
+
+        return view('shoes.show', compact('shoe'));
+    }
 }
