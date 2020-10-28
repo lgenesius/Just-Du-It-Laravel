@@ -21,7 +21,12 @@ Route::post('/shoes', 'ShoesController@store');
 Route::get('/shoes/{shoe}/edit', 'ShoesController@edit');
 Route::put('/shoes/{shoe}', 'ShoesController@update');
 
-Route::get('carts/{shoe:id}/add', 'CartController@show');
+Route::get('addToCart/{shoe:id}', 'CartController@show');
+Route::post('addToCart/{shoe:id}', 'CartController@store');
+Route::view('/cartIndex', '/carts/cartIndex');
+Route::get('/updateCart/{CartDetail:id}', 'CartController@update');
+
+Route::view('/transaction', '/transactions/history');
 
 
 Route::get('/', 'HomeController@index');

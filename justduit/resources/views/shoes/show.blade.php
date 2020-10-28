@@ -15,7 +15,7 @@
 
                 @else
                     @if (auth()->user()->role == 2)
-                    <a href="/carts/{{$shoe->id}}/add" class="mt-2 btn btn-primary">Add to Cart</a>
+                    <a href="/addToCart/{{$shoe->id}}" class="mt-2 btn btn-primary">Add to Cart</a>
 
                     @else
                         <a href="/shoes/{{$shoe->id}}/edit" class="mt-2 btn btn-primary">Update Shoe</a>

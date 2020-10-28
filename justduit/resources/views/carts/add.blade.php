@@ -14,21 +14,25 @@
                 @guest
 
                 @else
-                    @if (auth()->user()->role == 2)
-                <div class="d-flex justify-content-start">
-                    <label class = "d-flex align-items-center" for="quantity" style="margin-right: 1em">Quantity</label>
-                    <input style = "width: 12em"type="text" name="quantity" placeholder = "{{old('quantity') ?? 0}}" id="quantity" class="form-control @error('quantity') is-invalid @enderror">
-                    @error('quantity')
-                        <div class="invalid-feedback">
-                            {{$message}}
+                    <form action="/addToCart/{{$shoe->id}}" method="POST">
+                        @csrf
+
+                        <div class="d-flex justify-content-start flex-wrap" style="width: 17em">
+                            <label class = "d-flex align-items-center" for="quantity" style="margin-right: 1em">Quantity</label>
+                            <input style = "width: 12em" type="number" name="quantity" placeholder = "{{old('quantity') ?? 0}}" id="quantity" class="form-control @error('quantity') is-invalid @enderror">
+                            @error('quantity')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
                         </div>
-                    @enderror
-                </div>
-                    <a href="/carts/{{$shoe->id}}/add" class="mt-2 btn btn-primary">Add to Cart</a>
+                    @if (auth()->user()->role == 2)
+                    <button class="mt-3 btn btn-primary" type="submit">Add to Cart</button>
 
                     @else
                         <a href="/shoes/{{$shoe->id}}/edit" class="mt-2 btn btn-primary">Update Shoe</a>
                     @endif
+                </form>
                 @endguest
             </div>
             <div class="show-shoe-text">
