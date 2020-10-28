@@ -21,6 +21,9 @@ Route::post('/shoes', 'ShoesController@store');
 Route::get('/shoes/{shoe}/edit', 'ShoesController@edit');
 Route::put('/shoes/{shoe}', 'ShoesController@update');
 
+Route::get('carts/{shoe:id}/add', 'CartController@show');
+
+
 Route::get('/', 'HomeController@index');
 Route::get('/search', 'HomeController@search');
 Route::get('/shoes/{shoe}', 'HomeController@show');

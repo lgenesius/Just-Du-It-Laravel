@@ -15,6 +15,15 @@
 
                 @else
                     @if (auth()->user()->role == 2)
+                <div class="d-flex justify-content-start">
+                    <label class = "d-flex align-items-center" for="quantity" style="margin-right: 1em">Quantity</label>
+                    <input style = "width: 12em"type="text" name="quantity" placeholder = "{{old('quantity') ?? 0}}" id="quantity" class="form-control @error('quantity') is-invalid @enderror">
+                    @error('quantity')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
                     <a href="/carts/{{$shoe->id}}/add" class="mt-2 btn btn-primary">Add to Cart</a>
 
                     @else

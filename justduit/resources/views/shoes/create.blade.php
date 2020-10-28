@@ -19,13 +19,14 @@
                     <div class="form-group row mt-4">
                         <label for="name" class="col-md-4 col-form-label">Shoe Name</label>
 
-                        <input type="text" id="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}">
+                        <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}">
 
-                        @if ($errors->has('name'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('name') }}</strong>
-                            </span>
-                        @endif
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+
                     </div>
 
                     <div class="form-group row">
@@ -33,11 +34,11 @@
 
                         <input type="number" id="price" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" name="price" value="{{ old('price') }}">
 
-                        @if ($errors->has('price'))
+                        @error('price')
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('price') }}</strong>
+                                <strong>{{ $message }}</strong>
                             </span>
-                        @endif
+                        @enderror
                     </div>
 
                     <div class="form-group row">

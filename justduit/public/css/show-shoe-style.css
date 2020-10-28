@@ -7,7 +7,8 @@
 }
 
 .show-shoe-section img{
-    width: 400px;
+    width: 300px;
+    object-fit: cover;
 }
 
 .show-shoe-text{
