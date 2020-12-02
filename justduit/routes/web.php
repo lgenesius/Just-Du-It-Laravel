@@ -15,11 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/shoes', 'ShoesController@index');
-Route::get('/shoes/create', 'ShoesController@create');
-Route::post('/shoes', 'ShoesController@store');
-Route::get('/shoes/{shoe}/edit', 'ShoesController@edit');
-Route::put('/shoes/{shoe}', 'ShoesController@update');
+
+
+
+Route::prefix('shoes')->middleware('auth')->group(function(){
+    Route::get('', 'ShoesController@index');
+    Route::get('/create', 'ShoesController@create');
+    Route::post('', 'ShoesController@store');
+    Route::get('/{shoe}/edit', 'ShoesController@edit');
+    Route::put('/{shoe}', 'ShoesController@update');
+    Route::get('/{shoe}', 'HomeController@show')->withoutMiddleware('auth');
+});
 
 Route::get('addToCart/{shoe:id}', 'CartController@show');
 Route::post('addToCart/{shoe:id}', 'CartController@store');
@@ -28,8 +34,7 @@ Route::get('/updateCart/{CartDetail:id}', 'CartController@update');
 
 Route::view('/transaction', '/transactions/history');
 
-
 Route::get('/', 'HomeController@index');
 Route::get('/search', 'HomeController@search');
-Route::get('/shoes/{shoe}', 'HomeController@show');
+
 

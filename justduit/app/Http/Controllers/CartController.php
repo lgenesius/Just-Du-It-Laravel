@@ -10,14 +10,15 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     public function show(Shoe $shoe){
-        if(auth()->user()->role == 2){
+        // dd(auth()->user());
+        if(auth()->user()){
             return view('carts.add', ['shoe' => $shoe]);
         }
         abort(401);
     }
 
     public function store(){
-        if(auth()->user()->role == 2){
+        if(auth()->user()){
             $attr = request()->validate([
                 'quantity' => 'required|numeric|min:1'
             ]);

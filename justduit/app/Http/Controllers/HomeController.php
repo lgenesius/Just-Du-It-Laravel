@@ -33,7 +33,6 @@ class HomeController extends Controller
     }
 
     public function show(Shoe $shoe){
-
         return view('shoes.show', compact('shoe'));
     }
 }
