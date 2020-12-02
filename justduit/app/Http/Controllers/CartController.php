@@ -82,4 +82,11 @@ class CartController extends Controller
         }
         abort(401);
     }
+
+    public function destroy(Shoe $shoe){
+        $shoe->users()->detach();
+        // $shoe->delete();
+        // session()->flash("success", "shoe successfully deleted!");
+        return redirect('cartIndex');
+    }
 }

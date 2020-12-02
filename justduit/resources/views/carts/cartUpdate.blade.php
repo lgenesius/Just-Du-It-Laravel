@@ -25,7 +25,7 @@
                     <div>
                         @guest
                         @else
-                        <div class="my-4">
+                        <div class="d-flex my-4">
                             <form action="/cartUpdate/{{$shoe->id}}/edit" method="POST">
                                 @method('patch')
                                 @csrf
@@ -38,11 +38,43 @@
                                         </div>
                                     @enderror
                                 </div>
-                            <div class="d-flex align-items-baseline justify-content-around">
                                 <button class="mt-3 btn btn-primary" type="submit">Update</button>
-                                <a class=".text-info" type="submit" style="text-decoration: none">Delete</a>
+                            </form>
+                        </div>
+                        <div class="">
+                            <a class=".text-info mx-3" data-toggle="modal" style="text-decoration: none" data-target="#exampleModal">Delete</a>
+                            <div class="container">
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Apakah Anda ingin menghapus?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-2">
+                                                <div>{{$shoe->name}}</div>
+                                                <small>
+                                                    <div class="text-secondary">
+                                                        Price: Rp {{$shoe->price}},00
+                                                </small>
+                                            </div>
+                                            </div>
+                                            <form action="/cartUpdate/{{$shoe->id}}/delete" method="post">
+                                                @csrf
+                                                @method("delete")
+                                                <div class="d-flex">
+                                                    <button class="btn btn-danger mr-3" type="submit">Ya</button>
+                                                    <button class="btn btn-success" type="submit" data-dismiss="modal">Tidak</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
                         </div>
                     @endguest
                     </div>

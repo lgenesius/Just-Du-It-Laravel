@@ -31,8 +31,12 @@ Route::get('addToCart/{shoe:id}', 'CartController@show');
 Route::post('addToCart/{shoe:id}', 'CartController@store');
 Route::get('/cartIndex', 'CartController@index');
 
-Route::get('/cartUpdate/{shoe:id}/edit', 'CartController@edit');
-Route::patch('/cartUpdate/{shoe:id}/edit', 'CartController@update');
+Route::prefix('cartUpdate')->middleware('auth')->group(function(){
+    Route::get('/{shoe:id}/edit', 'CartController@edit');
+    Route::patch('/{shoe:id}/edit', 'CartController@update');
+    Route::delete('/{shoe:id}/delete', 'CartController@destroy');
+});
+
 
 Route::view('/transaction', '/transactions/history');
 
