@@ -21,7 +21,7 @@
                     <p class="card-text">Rp {{$cart->price}}</p>
                     <p class="card-text">{{$cart->quantity}}</p>
                     <p class="card-text">Rp {{$cart->price * $cart->quantity}}</p>
-                    <a href="/updateCart/}" class="btn btn-primary">Edit</a>
+                    <a href="/cartUpdate/{{$cart->shoe_id}}/edit" class="btn btn-primary">Edit</a>
                 </div>
             @empty
                 <div class="d-flex justify-content-center">

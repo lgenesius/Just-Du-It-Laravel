@@ -53,7 +53,33 @@ class CartController extends Controller
         abort(401);
     }
 
-    public function update(){
+    public function edit(Shoe $shoe){
+        return view('carts.cartUpdate', compact('shoe'));
+    }
 
+    public function update(Shoe $shoe){
+        if(auth()->user()){
+            $quantity = request('quantity');
+            $user = auth()->user();
+            $currCart = Cart::where('user_id', $user->id)->get();
+
+            $attr = request()->validate([
+                'quantity' => 'required|numeric|min:1'
+            ]);
+
+            foreach($currCart as $currCarts){
+                if($currCarts->shoe_id == $shoe->id){
+                    // dd($quantity);
+                    $shoe->users()->updateExistingPivot($user, array('quantity' => $quantity), true);
+                    $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
+                    return view('carts.cartIndex', compact('carts'));
+                }
+            }
+
+            $user->shoes()->attach($shoe->id, ['quantity' => request('quantity')]);
+            $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
+            return view('carts.cartIndex', compact('carts'));
+        }
+        abort(401);
     }
 }
