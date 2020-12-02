@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function shoes(){
+        return $this->belongsToMany(Shoe::class)
+        ->withTimestamps()->withPivot('quantity');
+    }
 }

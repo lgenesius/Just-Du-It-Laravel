@@ -4,8 +4,8 @@
     @else
         @if (auth()->user()->role == 2)
             <a href="/shoes">View All Shoe</a>
-            <a href="">View Cart</a>
-            <a href="">View Transaction</a>
+            <a href="/cartIndex">View Cart</a>
+            <a href="/transaction">View Transaction</a>
         @else
             @if (auth()->user()->role == 1)
                 <a href="/shoes">View All Shoe</a>

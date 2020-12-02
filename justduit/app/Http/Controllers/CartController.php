@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function index(){
+        $user = auth()->user();
+        // $carts = \DB::table('shoe_user')->where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
+        // dd($carts);
+
+        return view('carts.cartIndex', [
+            'carts' => \DB::table('shoe_user')->where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get()
+        ]);
+    }
+
     public function show(Shoe $shoe){
         // dd(auth()->user());
         if(auth()->user()){
@@ -17,17 +27,33 @@ class CartController extends Controller
         abort(401);
     }
 
-    public function store(){
+    public function store(Shoe $shoe){
         if(auth()->user()){
+            $quantity = request('quantity');
+            $user = auth()->user();
+            $currCart = Cart::where('user_id', $user->id)->get();
+
             $attr = request()->validate([
                 'quantity' => 'required|numeric|min:1'
             ]);
 
-            // Cart::create([
+            foreach($currCart as $currCarts){
+                if($currCarts->shoe_id == $shoe->id){
+                    $finalQuantity = $currCarts-> quantity + $quantity;
+                    $shoe->users()->updateExistingPivot($user, array('quantity' => $finalQuantity), true);
+                    $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
+                    return view('carts.cartIndex', compact('carts'));
+                }
+            }
 
-            // ]);
-        return back();
+            $user->shoes()->attach($shoe->id, ['quantity' => request('quantity')]);
+            $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
+            return view('carts.cartIndex', compact('carts'));
         }
         abort(401);
+    }
+
+    public function update(){
+
     }
 }

@@ -29,7 +29,7 @@ Route::prefix('shoes')->middleware('auth')->group(function(){
 
 Route::get('addToCart/{shoe:id}', 'CartController@show');
 Route::post('addToCart/{shoe:id}', 'CartController@store');
-Route::view('/cartIndex', '/carts/cartIndex');
+Route::get('/cartIndex', 'CartController@index');
 Route::get('/updateCart/{CartDetail:id}', 'CartController@update');
 
 Route::view('/transaction', '/transactions/history');

@@ -14,7 +14,7 @@
                 @guest
 
                 @else
-                    <form action="/addToCart/{{$shoe->id}}" method="POST">
+                <form action="/addToCart/{{$shoe->id}}" method="POST">
                         @csrf
 
                         <div class="d-flex justify-content-start flex-wrap" style="width: 17em">
