@@ -25,7 +25,7 @@
                     <div>
                         @guest
                         @else
-                        <div class="d-flex my-4">
+                        <div class="d-flex mt-4">
                             <form action="/cartUpdate/{{$shoe->id}}/edit" method="POST">
                                 @method('patch')
                                 @csrf
@@ -38,11 +38,11 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <button class="mt-3 btn btn-primary" type="submit">Update</button>
+                                <button class="mt-3 btn btn-primary mt-4" type="submit">Update</button>
                             </form>
                         </div>
-                        <div class="">
-                            <a class=".text-info mx-3" data-toggle="modal" style="text-decoration: none" data-target="#exampleModal">Delete</a>
+                        <div class="mt-3">
+                            <a class=".text-info btn" data-toggle="modal" style="text-decoration: none; background: red; color: white" data-target="#exampleModal">Delete</a>
                             <div class="container">
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
