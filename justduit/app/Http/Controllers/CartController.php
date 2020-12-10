@@ -32,7 +32,6 @@ class CartController extends Controller
             $quantity = request('quantity');
             $user = auth()->user();
             $currCart = Cart::where('user_id', $user->id)->get();
-
             $attr = request()->validate([
                 'quantity' => 'required|numeric|min:1'
             ]);
@@ -42,12 +41,14 @@ class CartController extends Controller
                     $finalQuantity = $currCarts-> quantity + $quantity;
                     $shoe->users()->updateExistingPivot($user, array('quantity' => $finalQuantity), true);
                     $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
+                    session()->flash("success", "{$shoe->name} successfully added into you Cart!");
                     return view('carts.cartIndex', compact('carts'));
                 }
             }
 
             $user->shoes()->attach($shoe->id, ['quantity' => request('quantity')]);
             $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
+            session()->flash("success", "{$shoe->name} successfully put into you Cart!");
             return view('carts.cartIndex', compact('carts'));
         }
         abort(401);
@@ -72,12 +73,14 @@ class CartController extends Controller
                     // dd($quantity);
                     $shoe->users()->updateExistingPivot($user, array('quantity' => $quantity), true);
                     $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
+                    session()->flash("success", "{$shoe->name} successfully updated!");
                     return view('carts.cartIndex', compact('carts'));
                 }
             }
 
             $user->shoes()->attach($shoe->id, ['quantity' => request('quantity')]);
             $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
+            session()->flash("success", "{$shoe->name} successfully updated!");
             return view('carts.cartIndex', compact('carts'));
         }
         abort(401);
@@ -86,7 +89,7 @@ class CartController extends Controller
     public function destroy(Shoe $shoe){
         $shoe->users()->detach();
         // $shoe->delete();
-        // session()->flash("success", "shoe successfully deleted!");
+        session()->flash("error", "{$shoe->name} successfully deleted!");
         return redirect('cartIndex');
     }
 }

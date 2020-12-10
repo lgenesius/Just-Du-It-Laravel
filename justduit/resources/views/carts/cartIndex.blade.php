@@ -10,6 +10,7 @@
 <div class="main-body">
     @include('layouts.sidebar')
     <div class="container mt-3">
+        @include('alert')
         <div class="card text-center">
             <div class="card-header bg-primary" style="color: white; font-weight: bold">
               View Cart
@@ -47,7 +48,7 @@
                         @endforelse
                     </tbody>
                 </table>
-                <a href="" class="btn btn-primary" style="width: 50%; margin-top:20px">Checkout</a>
+                <a href="" class="btn btn-primary {{$carts->isEmpty() ? 'disabled' : ''}}" style="width: 50%; margin-top:20px">Checkout</a>
             </div>
         </div>
     </div>
