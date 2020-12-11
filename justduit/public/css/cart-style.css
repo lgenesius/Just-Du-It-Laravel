@@ -1,0 +1,16 @@
+.checkout{
+    width: 50%;
+    margin-top:20px;
+    position: sticky;
+}
+
+/* ::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+} */
+
+/* .cart-container{
+    scrollbar-width: thin;
+    scrollbar-color: #888 #262626;
+} */
+
+

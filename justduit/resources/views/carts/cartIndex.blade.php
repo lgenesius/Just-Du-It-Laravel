@@ -2,6 +2,7 @@
 
 @section('link-style')
 <link rel="stylesheet" href="/css/show-shoe-style.css">
+<link rel="stylesheet" href="/css/cart-style.css">
 @endsection
 
 @section('content')
@@ -16,47 +17,49 @@
               View Cart
             </div>
             <div class="card-body">
-                <table class="table">
-                    @if (!$carts->isEmpty())
-                        <thead class="thead">
-                            <tr>
-                            <th scope="col">Image</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total Price</th>
-                            <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                    @else
+                <div class="table-responsive">
+                    <table class="table">
+                        @if (!$carts->isEmpty())
+                            <thead class="thead">
+                                <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total Price</th>
+                                <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                        @else
 
-                    @endif
-                    <tbody>
-                        @forelse ($carts as $cart)
-                            <tr>
-                                <td>
-                                    <a href="/shoes/{{ $cart->shoe_id }}" target="_blank">
-                                        <img src="/storage/{{ $cart->image }}" width = "300px" alt="">
-                                    </a>
-                                </td>
-                                <td><p class="card-text">{{$cart->name}}</p></td>
-                                <td><p class="card-text">{{$cart->quantity}}</p></td>
-                                <td><p class="card-text">Rp {{$cart->price * $cart->quantity}},-</p></td>
-                                <td><a href="/cartUpdate/{{$cart->shoe_id}}/edit" class="btn btn-primary">Edit</a></td>
-                            </tr>
-                        @empty
-                            <div class="d-flex justify-content-center">
-                                <div class="alert alert-info">
-                                    Your cart is Empty
+                        @endif
+                        <tbody>
+                            @forelse ($carts as $cart)
+                                <tr>
+                                    <td>
+                                        <a href="/shoes/{{ $cart->shoe_id }}" target="_blank">
+                                            <img src="/storage/{{ $cart->image }}" width = "300px" alt="">
+                                        </a>
+                                    </td>
+                                    <td class="align-middle"><p class="card-text">{{$cart->name}}</p></td>
+                                    <td class="align-middle"><p class="card-text">{{$cart->quantity}}</p></td>
+                                    <td class="align-middle"><p class="card-text">Rp {{$cart->price * $cart->quantity}},-</p></td>
+                                    <td class="align-middle"><a href="/cartUpdate/{{$cart->shoe_id}}/edit" class="btn btn-primary">Edit</a></td>
+                                </tr>
+                            @empty
+                                <div class="d-flex justify-content-center">
+                                    <div class="alert alert-info">
+                                        Your cart is Empty
+                                    </div>
                                 </div>
-                            </div>
-                        @endforelse
-                    </tbody>
-                </table>
-                <a href="/transaction" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary {{$carts->isEmpty() ? 'disabled' : ''}}" style="width: 50%; margin-top:20px">Checkout</a>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <a href="/transaction" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary {{$carts->isEmpty() ? 'disabled' : ''}} checkout">Checkout</a>
 
                 <div class="container">
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Apakah Anda ingin Checkout?</h5>
@@ -65,17 +68,17 @@
                                     </button>
                                 </div>
                                 <div class="modal-body" style="height: 450px;">
-                                    <div class="mb-2" style="overflow-y: scroll; max-height: 100%">
+                                    <div class="mb-2 cart-container" style="overflow-y: scroll; max-height: 100%">
                                         <div class="container">
                                             @foreach ($carts as $cart)
-                                                <div class="row">
+                                                <div class="row text-center">
                                                     <div class="col-md-6">
                                                         <a href="/shoes/{{ $cart->shoe_id }}" target="_blank">
                                                             <img class="img-checkout" width="150px" height="150px" style="object-fit: cover" src ="/storage/{{ $cart->image }}" alt="">
                                                         </a>
                                                     </div>
-                                                    <div class="col-md-6 justify-content-center">
-                                                        <div>{{$cart->name}}</div>
+                                                    <div class="col-md-6">
+                                                        {{$cart->name}}
                                                         <small>
                                                             <div class="text-secondary">
                                                                 Price: Rp {{$cart->price * $cart->quantity}},00
