@@ -11,18 +11,17 @@ class CartController extends Controller
 {
     public function index(){
         $user = auth()->user();
-        // $carts = \DB::table('shoe_user')->where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
-        // dd($carts);
-
         return view('carts.cartIndex', [
-            'carts' => \DB::table('shoe_user')->where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get()
+            'carts' => \DB::table('shoe_user')->where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get(),
+            'count' =>  Cart::where('user_id', auth()->user()->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->count()
         ]);
     }
 
     public function show(Shoe $shoe){
         // dd(auth()->user());
         if(auth()->user()){
-            return view('carts.add', ['shoe' => $shoe]);
+            $count = Cart::where('user_id', auth()->user()->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->count();
+            return view('carts.add', ['shoe' => $shoe, 'count' => $count]);
         }
         abort(401);
     }
@@ -32,6 +31,7 @@ class CartController extends Controller
             $quantity = request('quantity');
             $user = auth()->user();
             $currCart = Cart::where('user_id', $user->id)->get();
+            $count = Cart::where('user_id', auth()->user()->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->count();
             $attr = request()->validate([
                 'quantity' => 'required|numeric|min:1'
             ]);
@@ -42,20 +42,21 @@ class CartController extends Controller
                     $shoe->users()->updateExistingPivot($user, array('quantity' => $finalQuantity), true);
                     $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
                     session()->flash("success", "{$shoe->name} successfully added into you Cart!");
-                    return view('carts.cartIndex', compact('carts'));
+                    return view('carts.cartIndex', compact('carts', 'count'));
                 }
             }
 
             $user->shoes()->attach($shoe->id, ['quantity' => request('quantity')]);
             $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
             session()->flash("success", "{$shoe->name} successfully put into you Cart!");
-            return view('carts.cartIndex', compact('carts'));
+            return view('carts.cartIndex', compact('carts', 'count'));
         }
         abort(401);
     }
 
     public function edit(Shoe $shoe){
-        return view('carts.cartUpdate', compact('shoe'));
+        $count = Cart::where('user_id', auth()->user()->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->count();
+        return view('carts.cartUpdate', compact('shoe', 'count'));
     }
 
     public function update(Shoe $shoe){
@@ -63,7 +64,7 @@ class CartController extends Controller
             $quantity = request('quantity');
             $user = auth()->user();
             $currCart = Cart::where('user_id', $user->id)->get();
-
+            $count = Cart::where('user_id', auth()->user()->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->count();
             $attr = request()->validate([
                 'quantity' => 'required|numeric|min:1'
             ]);
@@ -74,14 +75,14 @@ class CartController extends Controller
                     $shoe->users()->updateExistingPivot($user, array('quantity' => $quantity), true);
                     $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
                     session()->flash("success", "{$shoe->name} successfully updated!");
-                    return view('carts.cartIndex', compact('carts'));
+                    return view('carts.cartIndex', compact('carts', 'count'));
                 }
             }
 
             $user->shoes()->attach($shoe->id, ['quantity' => request('quantity')]);
             $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
             session()->flash("success", "{$shoe->name} successfully updated!");
-            return view('carts.cartIndex', compact('carts'));
+            return view('carts.cartIndex', compact('carts', 'count'));
         }
         abort(401);
     }

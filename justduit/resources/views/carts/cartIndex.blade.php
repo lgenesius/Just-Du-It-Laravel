@@ -33,7 +33,11 @@
                     <tbody>
                         @forelse ($carts as $cart)
                             <tr>
-                                <td><img src="/storage/{{ $cart->image }}" width = "300px" alt=""></td>
+                                <td>
+                                    <a href="/shoes/{{ $cart->shoe_id }}" target="_blank">
+                                        <img src="/storage/{{ $cart->image }}" width = "300px" alt="">
+                                    </a>
+                                </td>
                                 <td><p class="card-text">{{$cart->name}}</p></td>
                                 <td><p class="card-text">{{$cart->quantity}}</p></td>
                                 <td><p class="card-text">Rp {{$cart->price * $cart->quantity}},-</p></td>
@@ -48,7 +52,59 @@
                         @endforelse
                     </tbody>
                 </table>
-                <a href="" class="btn btn-primary {{$carts->isEmpty() ? 'disabled' : ''}}" style="width: 50%; margin-top:20px">Checkout</a>
+                <a href="/transaction" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary {{$carts->isEmpty() ? 'disabled' : ''}}" style="width: 50%; margin-top:20px">Checkout</a>
+
+                <div class="container">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Apakah Anda ingin Checkout?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" style="height: 450px;">
+                                    <div class="mb-2" style="overflow-y: scroll; max-height: 100%">
+                                        <div class="container">
+                                            @foreach ($carts as $cart)
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <a href="/shoes/{{ $cart->shoe_id }}" target="_blank">
+                                                            <img class="img-checkout" width="150px" height="150px" style="object-fit: cover" src ="/storage/{{ $cart->image }}" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-6 justify-content-center">
+                                                        <div>{{$cart->name}}</div>
+                                                        <small>
+                                                            <div class="text-secondary">
+                                                                Price: Rp {{$cart->price * $cart->quantity}},00
+                                                            </div>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                @if (!$loop -> last)
+                                                    <hr>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                                <form action="" method="post">
+                                    @csrf
+                                    @method("delete")
+                                    <div class="container">
+                                        <div class="d-flex mb-3 justify-content-center">
+                                            <button class="btn btn-primary mr-3" type="submit">Checkout</button>
+                                            <button class="btn btn-danger" type="submit" data-dismiss="modal">Tidak</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

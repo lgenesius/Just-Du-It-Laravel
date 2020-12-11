@@ -17,7 +17,9 @@
                         @foreach ($shoes as $shoe)
                             <a href="/shoes/{{ $shoe->id }}" class="mt-1">
                                 <div class="index-shoe-detail">
-                                    <img src="/storage/{{ $shoe->image }}">
+                                    <div class="index-shoe-image">
+                                        <img src="/storage/{{ $shoe->image }}">
+                                    </div>
                                     <h5 class="mt-2">{{ $shoe->name }}</h5>
                                     <h5>Rp {{ $shoe->price }},-</h5>
                                 </div>

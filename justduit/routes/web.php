@@ -38,7 +38,7 @@ Route::prefix('cartUpdate')->middleware('auth')->group(function(){
 });
 
 
-Route::view('/transaction/{transaction}', '/transactions/history');
+Route::get('transaction','TransactionController@history');
 
 Route::get('/', 'HomeController@index');
 Route::get('/search', 'HomeController@search');

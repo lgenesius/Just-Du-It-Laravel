@@ -28,9 +28,19 @@
     text-align: center;
 }
 
-.index-shoe-detail img{
+
+.index-shoe-image{
+    overflow: hidden;
+}
+.index-shoe-image img{
     width: 100%;
     height: 250px;
+    object-fit: cover;
+    transition:  ease-in 0.5s;
+}
+
+.index-shoe-image:hover img{
+    transform: scale(1.2, 1.2);
 }
 
 .no-result{

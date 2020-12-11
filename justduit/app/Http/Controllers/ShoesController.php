@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Shoe;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,8 @@ class ShoesController extends Controller
 
     public function index(){
         $shoes = Shoe::orderBy('id','desc')->paginate(6);
-
-        return view('shoes.index', compact('shoes'));
+        $count = Cart::where('user_id', auth()->user()->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->count();
+        return view('shoes.index', compact('shoes', 'count'));
     }
 
     public function create(){
