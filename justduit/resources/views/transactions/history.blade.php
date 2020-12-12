@@ -15,23 +15,25 @@
               View All Transaction
             </div>
             <div class="card-body">
-                {{-- @foreach ($transactions as $transaction) --}}
+                @foreach ($transactions ?? '' as $transaction)
                 <div class="d-flex justify-content-center">
                     <div class="alert alert-primary px-5">
-                        <div class="d-flex justify-content-baseline">
-                            <p> $transaction->created_at->format("Y-F-D")}} </p>
-                            <p> Total Rp {$transaction->transactionTotal}</p>
+                        <div class="d-flex justify-content-between">
+                            {{-- <p> {{$transaction->created_at->format("Y-F-D")}} </p>
+                            <p> Total Rp AAAAA</p> --}}
+                            <div class="font-weight-normal bd-highlight mr-5">{{$transaction->created_at->format("Y-F-D")}}</div>
+                            <div class="font-weight-bolder bd-highlight ml-5">Flex item 2</div>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-start align-items-baseline my-5">
-                    {{-- @foreach ($transactions as $transaction) --}}
+                    @foreach ($transactions ?? '' as $transaction)
                     <h5 class="card-title mx-3">Image1</h5>
                     <h5 class="card-title mx-3">Image2</h5>
                     <h5 class="card-title mx-3">Image3</h5>
-                    {{-- @endforeach --}}
+                    @endforeach
                 </div>
-                {{-- @endforeach --}}
+                @endforeach
             </div>
           </div>
     </div>

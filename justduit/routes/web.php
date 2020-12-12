@@ -38,7 +38,8 @@ Route::prefix('cartUpdate')->middleware('auth')->group(function(){
 });
 
 
-Route::get('transaction','TransactionController@history');
+Route::get('transaction','TransactionController@index');
+Route::get('transaction/checkout','TransactionController@checkout');
 
 Route::get('/', 'HomeController@index');
 Route::get('/search', 'HomeController@search');

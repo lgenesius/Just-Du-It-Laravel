@@ -15,6 +15,7 @@ class CreateHeaderTransactionsTable extends Migration
     {
         Schema::create('header_transactions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete;
             $table->timestamps();
         });
     }

@@ -11,4 +11,8 @@ class Shoe extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+
+    public function transactions(){
+        return $this->belongsToMany(Transaction::class, 'detail_transactions');
+    }
 }

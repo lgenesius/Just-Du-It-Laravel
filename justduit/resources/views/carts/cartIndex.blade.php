@@ -93,16 +93,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form action="" method="post">
-                                    @csrf
-                                    @method("delete")
                                     <div class="container">
                                         <div class="d-flex mb-3 justify-content-center">
-                                            <button class="btn btn-primary mr-3" type="submit">Checkout</button>
+                                            {{-- <a href="/transaction/checkout" class="nav-link">Checkout</a> --}}
+                                            <button class="btn btn-primary mr-3" type="submit">
+                                                <a href="/transaction/checkout" style="text-decoration: none; color: white">Checkout</a>
+                                            </button>
                                             <button class="btn btn-danger" type="submit" data-dismiss="modal">Tidak</button>
                                         </div>
                                     </div>
-                                </form>
                             </div>
                         </div>
                         </div>
