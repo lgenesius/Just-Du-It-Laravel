@@ -6,6 +6,7 @@ use App\Cart;
 use App\DetailTransaction;
 use App\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -17,21 +18,25 @@ class TransactionController extends Controller
     }
 
     public function checkout(){
-        $user = auth()->user();
-        $user_id = auth()->user()->id;
-        $cart =  Cart::where('user_id', $user_id)->get();
 
-        $transaction = Transaction::create([
-            'user_id' => $user_id,
-        ]);
+        DB::transaction(function () {
+            $user = auth()->user();
+            $user_id = auth()->user()->id;
+            $cart =  Cart::where('user_id', $user_id)->get();
 
-        foreach($cart as $carts){
-            $transaction->shoes()->attach($carts->shoe_id, ['quantity' => $carts->quantity]);
-            // dd($carts);
-            $user->shoes()->detach($carts->shoe_id);
-        }
+            $transaction = Transaction::create([
+                'user_id' => $user_id,
+            ]);
 
-        $transactions = Transaction::where('user_id', $user_id)->get();
+            foreach($cart as $carts){
+                $transaction->shoes()->attach($carts->shoe_id, ['quantity' => $carts->quantity]);
+                // dd($carts);
+                $user->shoes()->detach($carts->shoe_id);
+            }
+
+        });
+
+        $transactions = Transaction::where('user_id', auth()->user()->id)->get();
         return redirect('transactions');
     }
 }
