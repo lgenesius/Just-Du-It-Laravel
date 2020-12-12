@@ -49,7 +49,7 @@ class CartController extends Controller
             $user->shoes()->attach($shoe->id, ['quantity' => request('quantity')]);
             $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
             session()->flash("success", "{$shoe->name} successfully put into you Cart!");
-            return view('carts.cartIndex', compact('carts', 'count'));
+            return redirect('/cartIndex');
         }
         abort(401);
     }
@@ -73,16 +73,14 @@ class CartController extends Controller
                 if($currCarts->shoe_id == $shoe->id){
                     // dd($quantity);
                     $shoe->users()->updateExistingPivot($user, array('quantity' => $quantity), true);
-                    $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
                     session()->flash("success", "{$shoe->name} successfully updated!");
-                    return view('carts.cartIndex', compact('carts', 'count'));
+                    return redirect('/cartIndex');
                 }
             }
 
             $user->shoes()->attach($shoe->id, ['quantity' => request('quantity')]);
-            $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
             session()->flash("success", "{$shoe->name} successfully updated!");
-            return view('carts.cartIndex', compact('carts', 'count'));
+            return redirect('/cartIndex');
         }
         abort(401);
     }

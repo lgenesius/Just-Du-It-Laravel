@@ -13,7 +13,7 @@
             @if (auth()->user()->role == 1)
                 <a href="/shoes">View All Shoe</a>
                 <a href="/shoes/create">Add Shoe</a>
-                <a href="">View All Transaction</a>
+                <a href="/transaction">View All Transaction</a>
             @endif
         @endif
     @endguest

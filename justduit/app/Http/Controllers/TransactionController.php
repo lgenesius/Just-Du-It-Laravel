@@ -11,9 +11,19 @@ use Illuminate\Support\Facades\DB;
 class TransactionController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(){
         $user_id = auth()->user()->id;
-        $transactions = Transaction::where('user_id', $user_id)->get();
+        if(auth()->user()->role == 1){
+            $transactions = Transaction::with('shoes')->get();
+        }
+        else if(auth()->user()->role == 2){
+            $transactions = Transaction::with('shoes')->where('user_id', $user_id)->get();
+        }
         return view('transactions.history', compact('transactions'));
     }
 

@@ -9,6 +9,7 @@ class Transaction extends Model
     protected $table = 'header_transactions';
     protected $fillable =['user_id'];
 
+
     public function user(){
         return $this->belongsTo(User::class);
     }
