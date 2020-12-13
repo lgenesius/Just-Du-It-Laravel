@@ -65,7 +65,7 @@ class ShoesController extends Controller
             'image' => ['required', 'image'],
         ]);
 
-        $imagePath = request('image')->store('images');
+        $imagePath = request('image')->store('images', 'public');
         Shoe::create([
             'name' => $data['name'],
             'price' => $data['price'],
