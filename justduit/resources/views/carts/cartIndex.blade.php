@@ -42,7 +42,7 @@
                                     </td>
                                     <td class="align-middle"><p class="card-text">{{$cart->name}}</p></td>
                                     <td class="align-middle"><p class="card-text">{{$cart->quantity}}</p></td>
-                                    <td class="align-middle"><p class="card-text">Rp {{$cart->price * $cart->quantity}},-</p></td>
+                                    <td class="align-middle"><p class="card-text">Rp {{number_format($cart->price * $cart->quantity,0,",",".")}},-</p></td>
                                     <td class="align-middle"><a href="/cartUpdate/{{$cart->shoe_id}}/edit" class="btn btn-primary">Edit</a></td>
                                 </tr>
                             @empty
@@ -81,7 +81,7 @@
                                                         {{$cart->name}}
                                                         <small>
                                                             <div class="text-secondary">
-                                                                Price: Rp {{$cart->price * $cart->quantity}},00
+                                                                Price: Rp {{number_format($cart->price * $cart->quantity,0,",",".")}},-
                                                             </div>
                                                         </small>
                                                     </div>
