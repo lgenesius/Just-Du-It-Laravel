@@ -10,7 +10,7 @@
     <div class="shoes-data-section">
         <div class="show-shoe-section">
             <div class="show-shoe-image">
-                <img src="/storage/{{$shoe->image}}" class="img-fluid" alt="Responsive image">
+                <img src="/storage/{{$shoe->image}}" alt="Responsive image">
             </div>
             <div class="show-shoe-text">
                 <div class="d-flex flex-column justify-content-between" style="height: 400px">
@@ -19,7 +19,7 @@
                         <h3>Price : Rp {{$shoe->price}},00</h3>
                         <div class="show-shoe-description mt-3">
                             <h4>Descriptions :</h4>
-                            <h4>{{$shoe->description}}</h4>
+                            <h5 style="text-align: justify; font-weight: lighter">{{$shoe->description}}</h5>
                         </div>
                     </div>
                     <div>

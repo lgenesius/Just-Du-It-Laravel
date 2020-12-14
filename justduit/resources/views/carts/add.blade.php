@@ -42,7 +42,7 @@
                 <h3>Price : Rp {{$shoe->price}},00</h3>
                 <div class="show-shoe-description mt-3">
                     <h4>Description :</h4>
-                    <h4>{{$shoe->description}}</h4>
+                    <h5 style="font-weight: lighter; text-align: justify">{{$shoe->description}}</h5>
                 </div>
             </div>
         </div>

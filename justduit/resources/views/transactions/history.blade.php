@@ -22,7 +22,7 @@
                             <div class="font-weight-normal bd-highlight mr-5">{{$transaction->created_at->format("D, F-Y")}}
                             <span style="color: white;" class="badge badge-pill badge-primary">{{$transaction->created_at->format("H:m:s")}}</span>
                             </div>
-                            <div class="font-weight-bolder bd-highlight ml-5">Flex item 2</div>
+                            <div class="font-weight-bolder bd-highlight ml-5">Rp {{number_format($transaction->total,0,",",".")}},-</div>
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                         <div class="row row-cols-3 justify-content-md-center">
                             @foreach ($transaction->shoes as $transactionDetail)
                             <div class="col mb-4">
-                                <img src="/storage/{{ $transactionDetail->image }}" width="200px" height="200px" alt="">
+                                <img src="/storage/{{ $transactionDetail->image }}" style="object-fit: cover" width="200px" height="200px" alt="">
                             </div>
                             @endforeach
                         </div>

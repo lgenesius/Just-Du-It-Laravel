@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(){
         /**
          * Index adalah naming convention standar pada laravel untuk menampilkan "semua" data dari database, sedangkan show untuk menampilkan data2 tertentu saja
@@ -65,7 +70,7 @@ class CartController extends Controller
                     $shoe->users()->updateExistingPivot($user, array('quantity' => $finalQuantity), true);
                     $carts = Cart::where('user_id', $user->id)->join('shoes', 'shoe_user.shoe_id', '=', 'shoes.id')->get();
                     session()->flash("success", "{$shoe->name} successfully added into you Cart!");
-                    return view('carts.cartIndex', compact('carts', 'count'));
+                    return redirect('/cartIndex');
                 }
             }
 

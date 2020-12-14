@@ -21,7 +21,7 @@
                                         <img src="/storage/{{ $shoe->image }}">
                                     </div>
                                     <h5 class="mt-2">{{ $shoe->name }}</h5>
-                                    <h5>Rp {{ $shoe->price }},-</h5>
+                                    <h5>Rp {{number_format($shoe->price,0,",",".")}},-</h5>
                                 </div>
                             </a>
                         @endforeach

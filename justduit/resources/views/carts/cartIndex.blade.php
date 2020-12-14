@@ -68,7 +68,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body" style="max-height: 450px;">
-                                    <div class="mb-2 cart-container" style="overflow-y: scroll; max-height: 100%">
+                                    <div class="mb-2 cart-container" style="overflow-y: scroll; max-height: 400px">
                                         <div class="container">
                                             @foreach ($carts as $cart)
                                                 <div class="row text-center">
